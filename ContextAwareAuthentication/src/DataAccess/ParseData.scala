@@ -1,15 +1,16 @@
 package DataAccess
 
 import scala.io.Source
+import java.util.LinkedList
 
 class ParseData {
   private val url = "https://dvikqteix2.execute-api.ap-northeast-2.amazonaws.com/prod/finopass/logs?types=phoneCall&userKey="
 
-  def parseCDR(userKey: String): Set[CDR] =
+  def parseCDR(userKey: String): LinkedList[CDR] =
     {
       var html = Source.fromURL(url + userKey)
       var s = html.mkString.split("userKey")
-      var userData = Set[CDR]()
+      var userData = new LinkedList[CDR]
 
       var i = 1
       while (i < s.length) {
@@ -19,8 +20,7 @@ class ParseData {
         cdr.setTime(line.split("timestamp\":")(1).split(",")(0).replace("\"", ""))
         cdr.setDuration(line.split("duration\":")(1).split(",")(0).replace("\"", ""))
         cdr.setDirection(line.split("isSent\":")(1).split(",")(0).replace("\"", ""))
-        println(cdr.getTime())
-        userData.+=(cdr)
+        userData.add(cdr)
 
         i += 2
       }

@@ -108,9 +108,12 @@ class Rule01 {
 
       while (i < phones.size) {
         var num = phones.get(i)
-        if (req.containsKey(num) && base.containsKey(num)) {
-          result = base.get(num) - req.get(num)
-        }
+        if (req.containsKey(num)){
+          if(base.containsKey(num)) {
+            result = base.get(num) - req.get(num)
+          }else println("base datalist doesn't have this phoneNumber : "+num)
+        }else println("req datalist doesn't have this phoneNumber : "+num)
+            
         i += 1
 
         println(result)

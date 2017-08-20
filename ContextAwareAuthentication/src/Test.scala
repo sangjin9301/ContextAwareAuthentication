@@ -5,7 +5,7 @@ object Test {
   
   def main(args: Array[String]): Unit = {
     var parser = new ParseData
-    var datas = parser.parseCDR("e5817b97-cb56-471e-a202-ee2b61a2bcd9")
+    var datas = parser.parseCDR("006328a3-90a5-4802-8b1a-7840a12313ef")
     var rule = new Rule01
     rule.setData(datas)
     rule.compareData

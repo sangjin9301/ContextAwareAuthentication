@@ -5,6 +5,9 @@ import java.util.HashMap
 import java.util.LinkedList
 
 import DataAccess.CDR
+import org.apache.commons.math3.random.RandomDataGenerator
+import org.apache.commons.math3.stat.inference.TTest
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * 2017-08-13
@@ -53,11 +56,11 @@ class Rule01 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if (gap <= 30) {
+        if ((gap >= 79)&&(gap <= 102)) {
 
           if (!freqMap.containsKey(number)) freqMap.put(number, 1)
           else {
-            var value = freqMap.get(number)
+            var value = freqMap.get(number) +1
             freqMap.remove(number)
             freqMap.put(number, value)
           }
@@ -84,11 +87,11 @@ class Rule01 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if (gap <= 7) {
+        if ((gap >= 72)&&(gap <= 79)) {
 
           if (!freqMap.containsKey(number)) freqMap.put(number, 1)
           else {
-            var value = freqMap.get(number)
+            var value = freqMap.get(number)+1
             freqMap.remove(number)
             freqMap.put(number, value)
           }
@@ -101,25 +104,39 @@ class Rule01 {
 
   def compareData: Unit =
     {
+      var engine = new TTest
       var req: HashMap[String, Int] = getOneWeekFreq // why they have zero?
       var base: HashMap[String, Int] = getOneMonthFreq
       var result: Int = 0
       var i = 0
 
-      while (i < phones.size) {
+      var arrSet1 = new Array[Double](49)
+      var arrSet2 = new Array[Double](49)
+        
+      while (i < phones.size) 
+      {
+        result = 0
         var num = phones.get(i)
-        if (req.containsKey(num)){
-          if(base.containsKey(num)) {
-            result = base.get(num) - req.get(num)
-          }else println("base datalist doesn't have this phoneNumber : "+num)
-        }else println("req datalist doesn't have this phoneNumber : "+num)
-            
+        var reqFreq = req.get(num)
+        var baseFreq = base.get(num)/4
+        
+        if(reqFreq == null) reqFreq = 0;
+        if(baseFreq == null) baseFreq = 0;
+        
+        if((req.containsKey(num))||(base.containsKey(num)))
+        {
+          result = baseFreq - reqFreq
+          arrSet1.update(i, reqFreq)
+          arrSet2.update(i, baseFreq)
+          
+          
+
+          println(num + " : " + baseFreq+" - "+reqFreq+" = "+result)
+        }
         i += 1
-
-        println(result)
-
       }
-
+      println("arrSet : "+ arrSet1.length)
+      println("p-value is "+engine.pairedTTest(arrSet1, arrSet2))
     }
 }
 

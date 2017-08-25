@@ -10,13 +10,13 @@ import org.apache.commons.math3.stat.inference.TTest
 import scala.collection.mutable.ArrayBuffer
 
 /**
- * 2017-08-13
+ * 2017-08-23
  * @author SANGJIN-NAM
  *
- * Rule 01 : Compare base Frequency, one month and one week
+ * Rule 02 : Compare base Frequency, one week and one day
  *
  */
-class Rule01 {
+class Rule02 {
 
   private var phones = new LinkedList[String] // for count Phone
   private var dataList = new LinkedList[Array[String]]
@@ -38,7 +38,7 @@ class Rule01 {
 
     }
 
-  def getOneMonthFreq: HashMap[String, Int] =
+  def getOneDayFreq: HashMap[String, Int] =
     {
 
       var freqMap = new HashMap[String, Int]
@@ -56,7 +56,7 @@ class Rule01 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if ((gap >= 79)&&(gap <= 102)) {
+        if ((gap >= 79)&&(gap <= 80)) {
 
           if (!freqMap.containsKey(number)) freqMap.put(number, 1)
           else {
@@ -105,8 +105,8 @@ class Rule01 {
   def compareData: Unit =
     {
       var engine = new TTest
-      var req: HashMap[String, Int] = getOneWeekFreq // why they have zero?
-      var base: HashMap[String, Int] = getOneMonthFreq
+      var req: HashMap[String, Int] = getOneDayFreq// why they have zero?
+      var base: HashMap[String, Int] = getOneWeekFreq 
       var result: Int = 0
       var i = 0
 
@@ -135,8 +135,10 @@ class Rule01 {
         }
         i += 1
       }
-      println("Rule01 : arrSet : "+ i)
-      println("Rule01 : p-value is "+engine.pairedTTest(arrSet1, arrSet2))
+      println("Rule02 : arrSet : "+ base.size())
+      
+      //Data가 30개 미만으로 정규성을 검사해야하고 정규성을 따르지 않는다면 rank some test를 실행하자
+      println("Rule02 : p-value is "+engine.pairedTTest(arrSet1, arrSet2))
     }
 }
 

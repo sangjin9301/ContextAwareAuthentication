@@ -20,6 +20,6 @@ object RuleExecute {
     rule3.compareData
     var rule4 = new Rule04
     rule4.setData(datas)
-    rule4.compareData
+    rule4.compareData(99) // score = 80% 
   }
 }

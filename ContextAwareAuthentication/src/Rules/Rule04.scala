@@ -112,14 +112,14 @@ class Rule04 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if (gap == 79) freq += 1
+        if (gap == 101) freq += 1
         i += 1
       }
       return freq
     }
 
   //20%
-  def compareData: Unit =
+  def compareData(per : Double): Unit =
     {
       var baseFreq: Array[Double] = getOneMonthFreq
       var reqFreq: Double = getOneDayFreq
@@ -132,17 +132,28 @@ class Rule04 {
           sum += baseFreq(i)
           i += 1
         }
-        var norm = new NormalDistribution(sum / 30, SD.evaluate(baseFreq))
+        var norm = new NormalDistribution(sum/baseFreq.length, SD.evaluate(baseFreq))
         var sd = Math.sqrt(SD.evaluate(baseFreq))
         var prob: Double = 0
-        //    var prob = norm.probability((0.5*sd)+norm.getMean, (0.6*sd)+norm.getMean)*2
-        if (norm.getMean > reqFreq) {
-          prob = norm.probability(reqFreq, norm.getMean) * 2
-        } else prob = norm.probability(norm.getMean, reqFreq) * 2
+        
+        per match {
+          case 99 => prob = norm.probability((-0.01*sd)+norm.getMean, (0.01*sd)+norm.getMean) // Z = 0.01  --> 0.0040
+          case 95 => prob = norm.probability((-0.06*sd)+norm.getMean, (0.06*sd)+norm.getMean) // Z = 0.06  --> 0.0239
+          case 90 => prob = norm.probability((-0.12*sd)+norm.getMean, (0.12*sd)+norm.getMean) // Z = 0.12  --> 0.0478
+          case 80 => prob = norm.probability((-0.25*sd)+norm.getMean, (0.25*sd)+norm.getMean) // Z = 0.25  --> 0.0978
+          case 60 => prob = norm.probability((-0.52*sd)+norm.getMean, (0.52*sd)+norm.getMean) // Z = 0.52  --> 0.1985
+          case 50 => prob = norm.probability((-0.67*sd)+norm.getMean, (0.67*sd)+norm.getMean) // Z = 0.67  --> 0.1985
+          case _ => println("[99 , 95, 90 , 80, 60, 50]")
+        }
+//        prob = norm.probability(-(0.25*sd)+norm.getMean, (0.25*sd)+norm.getMean) // Z = 0.25  --> 0.948 
+//        if (norm.getMean > reqFreq) {
+//          prob = norm.probability(reqFreq, norm.getMean) * 2
+//        } else prob = norm.probability(norm.getMean, reqFreq) * 2
 
-        println("base m : " + norm.getMean)
+        println("base m : " + norm.getMean + "  sig : "+sd)
         println("req m : " + reqFreq)
         println("Rule04 score : " + (1 - prob))
+        println("test : " + (-0.25*sd)+norm.getMean + " : Z : " + (0.25*sd)+norm.getMean)
       }
     }
 }

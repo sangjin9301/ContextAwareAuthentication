@@ -1,7 +1,8 @@
 package DataAccess
 
-import scala.io.Source
 import java.util.LinkedList
+
+import scala.io.Source
 
 class ParseData {
   private val url = "https://dvikqteix2.execute-api.ap-northeast-2.amazonaws.com/prod/finopass/logs?types=phoneCall&userKey="
@@ -27,5 +28,22 @@ class ParseData {
 
       if (userData.isEmpty) println("userData is Empty!!")
       return userData
+    }
+
+  def parseLocation(path:String): Unit =
+    {
+      var i = 0
+      var locationString:String = ""
+      println("lines : "+Source.fromFile(path).getLines.length)
+      for(line<-Source.fromFile(path).getLines){
+        locationString += line+"\n"
+        println((i/Source.fromFile(path).getLines.length)*100)
+        i += 1
+      }
+      println("Parse Complit")
+      var properties = locationString.split("\"timestampMs\" : ")
+      for(data<-properties){
+        println(data)
+      }
     }
 }

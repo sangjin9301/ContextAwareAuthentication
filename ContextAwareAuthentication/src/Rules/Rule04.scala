@@ -112,7 +112,7 @@ class Rule04 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if (gap == 101) freq += 1
+        if (gap == 102) freq += 1
         i += 1
       }
       return freq
@@ -153,7 +153,9 @@ class Rule04 {
         println("base m : " + norm.getMean + "  sig : "+sd)
         println("req m : " + reqFreq)
         println("Rule04 score : " + (1 - prob))
-        println("test : " + (-0.25*sd)+norm.getMean + " : Z : " + (0.25*sd)+norm.getMean)
+        println("###################################################################")
+        println("test : " + (-0.25*sd)+norm.getMean + " < Z < " + (0.25*sd)+norm.getMean)
+        println("###################################################################")
       }
     }
 }

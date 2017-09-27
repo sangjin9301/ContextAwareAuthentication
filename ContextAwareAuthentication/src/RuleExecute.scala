@@ -4,6 +4,7 @@ import Rules.Rule03
 import Rules.Rule02
 import Rules.Rule01
 import Rules.Rule04
+import Rules.Rule06
 
 
 object RuleExecute {
@@ -21,5 +22,7 @@ object RuleExecute {
     var rule4 = new Rule04
     rule4.setData(datas)
     rule4.compareData(60) // score = 80% 
+    
+    
   }
 }

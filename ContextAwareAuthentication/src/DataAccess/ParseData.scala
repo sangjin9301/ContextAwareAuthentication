@@ -5,6 +5,9 @@ import java.util.LinkedList
 import scala.io.Source
 import org.json.JSONObject
 import org.json.JSONArray
+import java.io.FileWriter
+import java.io.BufferedWriter
+import com.opencsv.CSVWriter
 
 class ParseData {
   private val url = "https://dvikqteix2.execute-api.ap-northeast-2.amazonaws.com/prod/finopass/logs?types=phoneCall&userKey="
@@ -32,29 +35,30 @@ class ParseData {
       return userData
     }
 
-  def parseLocation(path:String): Unit =
+  def parseLocation(path:String): LinkedList[Location] =
     {
       var strList = new LinkedList[String]
       var LocationList = new LinkedList[Location]
       var i = 0
       var locationString:String = ""
-      println("파일 읽는 중...")
+      println("Location 파일 읽는 중...")
       locationString = Source.fromFile(path).mkString
       
       println("JSON_Object 생성 중...")
       var jsonOb = new JSONObject(locationString)
       
-      println("파싱 중...")
+      println("List [Location Object] 생성 중...")
       var arr: JSONArray = jsonOb.getJSONArray("locations")
       while(i<arr.length()){
         var loc = new Location
         loc.setTimestamp(arr.getJSONObject(i).getString("timestampMs").toDouble)
-        loc.setLatitude(arr.getJSONObject(i).getString("latitudeE7").toDouble)
-        loc.setLongitude(arr.getJSONObject(i).getString("longitudeE7").toDouble)
+        loc.setLatitude(arr.getJSONObject(i).getString("latitudeE7").toInt/100)
+        loc.setLongitude(arr.getJSONObject(i).getString("longitudeE7").toInt/100)
         loc.setAccuracy(arr.getJSONObject(i).getString("accuracy").toInt)
         LocationList.add(loc)
         i += 1
       }
-      println("끝")
+      println("파싱 완료")
+      return LocationList    
     }
 }

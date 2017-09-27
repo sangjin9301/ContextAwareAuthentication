@@ -55,37 +55,38 @@ class Rule04 {
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
 
+        
         gap match {
-          case 73  => freqArr(0) += 1
-          case 74  => freqArr(1) += 1
-          case 75  => freqArr(2) += 1
-          case 76  => freqArr(3) += 1
-          case 77  => freqArr(4) += 1
-          case 78  => freqArr(5) += 1
-          case 79  => freqArr(6) += 1
-          case 80  => freqArr(7) += 1
-          case 81  => freqArr(8) += 1
-          case 82  => freqArr(9) += 1
-          case 83  => freqArr(10) += 1
-          case 84  => freqArr(11) += 1
-          case 85  => freqArr(12) += 1
-          case 86  => freqArr(13) += 1
-          case 87  => freqArr(14) += 1
-          case 88  => freqArr(15) += 1
-          case 89  => freqArr(16) += 1
-          case 90  => freqArr(17) += 1
-          case 91  => freqArr(18) += 1
-          case 92  => freqArr(19) += 1
-          case 93  => freqArr(20) += 1
-          case 94  => freqArr(21) += 1
-          case 95  => freqArr(22) += 1
-          case 96  => freqArr(23) += 1
-          case 97  => freqArr(24) += 1
-          case 98  => freqArr(25) += 1
-          case 99  => freqArr(26) += 1
-          case 100 => freqArr(27) += 1
-          case 101 => freqArr(28) += 1
-          case 102 => freqArr(29) += 1
+          case 125  => freqArr(0) += 1
+          case 126  => freqArr(1) += 1
+          case 127  => freqArr(2) += 1
+          case 128  => freqArr(3) += 1
+          case 129  => freqArr(4) += 1
+          case 130  => freqArr(5) += 1
+          case 131  => freqArr(6) += 1
+          case 132  => freqArr(7) += 1
+          case 133  => freqArr(8) += 1
+          case 134  => freqArr(9) += 1
+          case 135  => freqArr(10) += 1
+          case 136  => freqArr(11) += 1
+          case 137  => freqArr(12) += 1
+          case 138  => freqArr(13) += 1
+          case 139  => freqArr(14) += 1
+          case 140  => freqArr(15) += 1
+          case 141  => freqArr(16) += 1
+          case 142  => freqArr(17) += 1
+          case 143  => freqArr(18) += 1
+          case 144  => freqArr(19) += 1
+          case 145  => freqArr(20) += 1
+          case 146  => freqArr(21) += 1
+          case 147  => freqArr(22) += 1
+          case 148  => freqArr(23) += 1
+          case 149  => freqArr(24) += 1
+          case 150  => freqArr(25) += 1
+          case 151  => freqArr(26) += 1
+          case 152 => freqArr(27) += 1
+          case 153 => freqArr(28) += 1
+          case 154 => freqArr(29) += 1
           case _   => ;
         }
         i += 1

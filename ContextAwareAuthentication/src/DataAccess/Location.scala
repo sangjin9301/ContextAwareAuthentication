@@ -2,19 +2,19 @@ package DataAccess
 
 class Location {
   var timestamp: Double = 0
-  var latitude: Double = 0
-  var longitude: Double = 0
+  var latitude: Int = 0
+  var longitude: Int = 0
   var accuracy: Int = 0
   
   def setTimestamp(time : Double) : Unit = 
   {
     this.timestamp = time
   }
-  def setLatitude(latitude : Double) : Unit = 
+  def setLatitude(latitude : Int) : Unit = 
   {
     this.latitude = latitude
   }
-  def setLongitude(longitude : Double) : Unit = 
+  def setLongitude(longitude : Int) : Unit = 
   {
     this.longitude = longitude
   }
@@ -28,11 +28,11 @@ class Location {
   {
     return this.timestamp
   }
-  def getLatitude : Double = 
+  def getLatitude : Int = 
   {
     return this.latitude
   }
-  def getLongitude : Double = 
+  def getLongitude : Int = 
   {
     return this.longitude
   }

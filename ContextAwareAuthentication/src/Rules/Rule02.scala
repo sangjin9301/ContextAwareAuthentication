@@ -87,7 +87,7 @@ class Rule02 {
         var number = arr(1)
         var gap = ts.getTime - arr(0).toLong
         gap = gap / oneDay
-        if ((gap >= 100)&&(gap <= 106)) {
+        if ((gap >= 125)&&(gap <= 131)) {
 
           if (!freqMap.containsKey(number)) freqMap.put(number, 1)
           else {
